@@ -1,0 +1,2 @@
+Haskellissa on painoindeksi paino pituus = paino / (pituus * pituus) ja CPP:ssä (C++) pitää erikseen määritellä tyypit ja pyytää ohjelma
+pyytämään tyyppien mukaisten muuttujien arvo. Haskell on matemaattisempi ja "laiskempi" tyypityksessään. :-)
