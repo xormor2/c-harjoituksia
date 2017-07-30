@@ -1,2 +1,2 @@
-# c-harjoituksia
-Teen tässä C-harjoituksia.
+# c-harjoituksia, practicing c
+Teen tässä C-harjoituksia. Practicing C.
