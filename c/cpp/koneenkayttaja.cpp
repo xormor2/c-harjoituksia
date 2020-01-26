@@ -18,8 +18,9 @@ int main(void)
 	cout << "Juotko kahvia? "; cin >> kayttaja.kahvinjuonti;
 
 	if (kayttaja.kahvinjuonti=='k'||kayttaja.kahvinjuonti=='K') { cout << "Kupit kaakkoon!\n"; }
-	else { cout << "Muistathan juoda vettä säännöllisesti!\n"; }
+	else { cout << "Suosittelen juomaan teetä, maitoa, mehua.\n"; }
 
+	cout << "Muistathan juoda vettä säännöllisesti!\n";
 	cout << "Hyvää illanjatkoa!\n";
 
 	return 0;
