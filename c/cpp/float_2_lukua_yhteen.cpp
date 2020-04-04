@@ -1,8 +1,8 @@
 //2020:
 //Muokkasin tämän ohjelman Wikipedian C-kielisestä ohjelmasta artikkelista https://fi.wikipedia.org/wiki/C_(ohjelmointikieli)
-//I changed this program from the C-language example
-//program to my own C++ example program Wikipedia article https://fi.wikipedia.org/wiki/C_(ohjelmointikieli)
-//This program sums 2 standard input-given numbers together and gives out the answer to the standard output.
+//I changed this program from the C-language example program from the
+//Wikipedia article https://fi.wikipedia.org/wiki/C_(ohjelmointikieli) to my own C++ example program.
+//This program sums 2 standard input-given float-typed numbers together and gives out the float answer to the standard output.
 #include <iostream>
 using namespace std;
 
