@@ -18,6 +18,6 @@ int main(int argc, char *argv[])
 	int integer=0;
 	if (argc==1) { puts("Give an integer for command line parameter."); exit(1); }
 	integer=make_integer_out_of_ascii(argv[1]);
-   printf("%d\n", integer);	
+	printf("%d\n", integer);	
 	return 0;
 }
