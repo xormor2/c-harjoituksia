@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
     puts("copyleft Lauri K. Friberg 2023");
     puts("The program needs a commandline argument.");
     puts("The commandline argument needs to be an integer.");
-  	exit(1);
+    exit(1);
   }
   else
   {
