@@ -14,8 +14,8 @@ int main(void)
   for (i=0;i<32;i++) { x_single=(double)(2*x_single); x[1][i]=(double)x_single; } //laskee 2^n taulukkoon x[1][i]
   for (i=0;i<32;i++) { printf("%lu\n", (unsigned long int)x[1][i]); }  //tulostaa toisen potenssit taulukosta x[1][i]
   puts("Third (1, 2, 3, ...):");  
-  for (i=0;i<32;i++) { x[2][i]=(double)(i+1); }     //laskee käänteisluvut 1, 2, 3, ... taulukkoon x[2][i]
-  for (i=0;i<32;i++) { printf("%d ", (int)x[2][i]); }  //tulostaa käänteisluvut taulukosta x[2][i]
+  for (i=0;i<32;i++) { x[2][i]=(double)(i+1); }     //syöttää luvut 1, 2, 3, ... taulukkoon x[2][i]
+  for (i=0;i<32;i++) { printf("%d ", (int)x[2][i]); }  //tulostaa luvut taulukosta x[2][i]
   puts("");  
   return 0;
 }
