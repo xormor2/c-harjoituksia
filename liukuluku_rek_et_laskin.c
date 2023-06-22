@@ -38,7 +38,7 @@ const char *expression(const char *p, double *value);
 
 static const char *factor(const char *p, double *value) {
     switch (peek(&p)) {
-        case '0': case'1': case '2': case '3': case '4':
+        case '.': case '0': case'1': case '2': case '3': case '4':
         case '5': case'6': case '7': case '8': case '9':
             errno = 0;
             *value = strtod(p, (char **)&p);
