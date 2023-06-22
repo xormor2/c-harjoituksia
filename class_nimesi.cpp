@@ -6,13 +6,13 @@ private:
   string nimi;
 
 public:
-int kysynimi()
+  int kysynimi()
   {
-  using namespace std;
-  //string nimi;
-  cout << "Mikä on nimesi? ";
-  cin >> nimi; cout << "No hyvää päivää " << nimi << "!\n";
-  return 0;
+    using namespace std;
+    //string nimi;
+    cout << "Mikä on nimesi? ";
+    cin >> nimi; cout << "No hyvää päivää " << nimi << "!\n";
+    return 0;
   }
 };
 
