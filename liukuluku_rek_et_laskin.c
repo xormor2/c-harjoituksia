@@ -1,4 +1,4 @@
-/*
+/* This is a C program by "def" and me, "LinuxPetteri" 2020-2023, copyleft
  * Rekursiivisesti etenevä kokonaislukulaskin operaattoreilla + - * / % ( )
  *
  * $ gcc laskin.c -o laskin && ./laskin '(1 + 2*(3-4) + (5-6)*7)/-8 + 9'
