@@ -1,0 +1,155 @@
+/*
+ * Rekursiivisesti etenevä kokonaislukulaskin operaattoreilla + - * / % ( )
+ *
+ * $ gcc laskin.c -o laskin && ./laskin '(1 + 2*(3-4) + (5-6)*7)/-8 + 9'
+ * 10
+ */
+#include <ctype.h>
+#include <errno.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+/* Apustusfunktiot parsintaan */
+static int peek(const char **pp) {
+    while (isspace(**pp)) (*pp)++;
+    return **pp;
+}
+
+static int accept(const char **pp, char ch) {
+    return (peek(pp) == ch) ? *(*pp)++ : 0;
+}
+
+static int accept_any(const char **pp, const char *set) {
+    int ch = peek(pp);
+    while (*set && ch != *set) set++;
+    return *set ? accept(pp, ch) : 0;
+}
+
+/*
+ * Laskimen kielioppi:
+ *   expression -> addsub
+ *   addsub -> muldivmod { ( "+" | "-" ) muldivmod }
+ *   muldivmod -> unary { ( "*" | "/" | "%" ) unary }
+ *   unary -> { ( "+" | "-" ) } factor
+ *   factor -> integer | "(" expression ")"
+ */
+const char *expression(const char *p, double *value);
+
+static const char *factor(const char *p, double *value) {
+    switch (peek(&p)) {
+        case '0': case'1': case '2': case '3': case '4':
+        case '5': case'6': case '7': case '8': case '9':
+            errno = 0;
+            *value = strtol(p, (char **)&p, 10);
+            if (errno) {
+                perror("invalid integer");
+                p = NULL;
+            }
+            break;
+
+        case '(':
+            if (((p = expression(p+1, value)) && accept(&p, ')')) || !p)
+                return p;
+            fprintf(stderr, "missing parenthesis ')': ");
+            /* fall-through */
+        default:
+            if (*p == '\0') {
+                fprintf(stderr, "unexpected EOF\n");
+            } else if (isprint(*p)) {
+                fprintf(stderr, "unexpected character '%c'\n", *p);
+            } else {
+                fprintf(stderr, "bad character \"\\x%02X\"\n", *p);
+            }
+            p = NULL;
+            break;
+    }
+    return p;
+}
+
+/* Kieliopin välikkeiden jäsennysfunktiot */
+static const char *unary(const char *p, double *value) {
+    if (accept(&p, '+')) {
+        p = unary(p, value);
+    } else if (accept(&p, '-')) {
+        if ((p = unary(p, value)))
+            *value = -*value;
+    } else {
+        p = factor(p, value);
+    }
+    return p;
+}
+
+static const char *muldivmod(const char *p, double *value) {
+    if ((p = unary(p, value))) {
+        int op;
+        double rhs;
+        while ((op = accept_any(&p, "*/%")) && (p = unary(p, &rhs))) {
+            if (op == '*') {
+                *value *= rhs;
+            } else if (op == '/') {
+                *value /= rhs;
+            //} else if (op == '%') {
+             //   *value %= rhs;
+            }
+        }
+    }
+    return p;
+}
+
+static const char *addsub(const char *p, double *value) {
+    if ((p = muldivmod(p, value))) {
+        int op;
+        double rhs;
+        while ((op = accept_any(&p, "+-")) && (p = muldivmod(p, &rhs))) {
+            if (op == '+') {
+                *value += rhs;
+            } else if (op == '-') {
+                *value -= rhs;
+            }
+        }
+    }
+    return p;
+}
+
+const char *expression(const char *p, double *value) {
+    return addsub(p, value);
+}
+
+/* Aloitusvälike: parse -> expression EOF */
+int parse(const char *p, double *value) {
+    if ((p = expression(p, value)) && peek(&p) != '\0') {
+        fprintf(stderr, "junk at the end of expression: '%s'\n", p);
+        p = NULL;
+    }
+    return p != NULL;
+}
+
+/* Yhdistää komentoriviargumentit välilyönneillä ja syöttää parse():lle */
+int main(int argc, char *argv[]) {
+    int ok;
+    char *expr;
+    size_t i, size;
+    if (argc < 2) {
+        fprintf(stdout, "usage: %s '(1 + 2) * 3'\n", argv[0]);
+        return 0;
+    }
+
+    for (i = size = 0; ++i < argc; size += strlen(argv[i]) + 1);
+    if ((expr = malloc(size))) {
+        double value;
+        for (i = size = 0; ++i < argc; expr[size++] = " "[i == argc-1]) {
+            size_t len = strlen(argv[i]);
+            memcpy(&expr[size], argv[i], len);
+            size += len;
+        }
+        if ((ok = parse(expr, &value)))
+            fprintf(stdout, "%lf\n", value);
+        free(expr);
+    } else {
+        fprintf(stderr, "malloc(%lu) failed\n", (unsigned long)size);
+        ok = 0;
+    }
+
+    return !ok;
+}
