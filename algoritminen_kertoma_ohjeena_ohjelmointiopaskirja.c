@@ -5,12 +5,14 @@
 #include <stdlib.h>
 int main(int argc, char *argv[])
 {
-  if(argc<2) {
-  	puts("Anna kokonaisluku, lasken kertoman.");
+  if(argc<2)
+  {
+    puts("Anna kokonaisluku, lasken kertoman.");
     puts("./ohjelmanimi 5");    
     exit(1);
   }  
-  else if(argc>2) {
+  else if(argc>2)
+  {
     puts("Liian monta parametriä, kokeile ./ohjelmanimi 5");
   	exit(1);
   }  
