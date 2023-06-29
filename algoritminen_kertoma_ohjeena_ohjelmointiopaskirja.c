@@ -6,13 +6,13 @@
 int main(int argc, char *argv[])
 {
   if(argc<2) {
-  	 puts("Anna kokonaisluku, lasken kertoman.");
+  	puts("Anna kokonaisluku, lasken kertoman.");
     puts("./ohjelmanimi 5");    
     exit(1);
   }  
   else if(argc>2) {
-  	 puts("Liian monta parametriä, kokeile ./ohjelmanimi 5");
-  	 exit(1);
+    puts("Liian monta parametriä, kokeile ./ohjelmanimi 5");
+  	exit(1);
   }  
   int n=1, arg_n=1, tulos=1;
   arg_n=atoi(argv[1]);
