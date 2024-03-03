@@ -51,7 +51,8 @@ int main()
   else if (!strcmp(operaatio, "vahennys")) { puts("else if"); funktio[VAHENNYS](); }
   else if (!strcmp(operaatio, "kerto")) { funktio[KERTO](); }
   else if (!strcmp(operaatio, "jako" )) { funktio[JAKO](); }
-  else { puts("exit()"); return 1; }
+  else { funktio[LOPPU]; return 1; }
+  //else { puts("exit()"); return 1; }
   int i=0;
   //for (i=0; i<4; i++) { (*funktio[i])()=loppu; }
   //(*funktio[])()=&loppu;
