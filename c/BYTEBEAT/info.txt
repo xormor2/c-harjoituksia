@@ -1,0 +1,3 @@
+This code is from another author, and the copyright belongs to the original author. The code is available on the WWW and I can reveal you I only tried to and succeeded in changing the output to stdout by replacing
+individual numbers with others. You can as well go and copy paste the code from the original sources, and make your magic with a text editor and run the program with ./musicfile>/dev/dsp
+The programs can be compiled with gcc -o musicfile BYTEBEAT.c where the T can be replaced with 2 or 3.
