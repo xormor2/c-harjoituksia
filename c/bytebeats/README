@@ -1,0 +1,4 @@
+I got a piece of code from a web site - it was a blog - and I succeeded in compiling and running the program, so I decided to change some numbers from the code and since the code is
+of a "continuing sort" also known as a "no fail state" is achieved and all of the output of the program creates integers I decided to publish my own VERSIONS of the program. I do not have the copyright
+of the original. My mother says that the copyright belongs to the creator, and cannot be ceded so I would like to know if someone knows the original creator (viznut?) if it is OK for me to publish code from
+original creator with my own alterations: the numbers are changed but all else is intact, except that I of course had to add #include <stdio.h> because the code uses putchar().
